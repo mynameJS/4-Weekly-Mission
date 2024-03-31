@@ -1,0 +1,15 @@
+.input {
+  color: rgba(204, 213, 227, 1);
+  border: 1px solid black;
+}
+
+.input:focus {
+  border-color: rgba(109, 106, 254, 1);
+}
+.errorInput {
+  border: 1px solid rgba(255, 91, 86, 1);
+}
+
+.error {
+  color: rgba(255, 91, 86, 1);
+}
