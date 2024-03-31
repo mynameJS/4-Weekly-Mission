@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
 import Card from "./Card";
+import { CardListProps } from "@/types/api";
+import { MouseEvent } from "react";
 import styles from "./CardList.module.css";
 
 export default function CardList({
   cardDataList = [],
   folderNameAndLinkList = [],
-}) {
+}: CardListProps) {
   const [selectedCardId, setSelectedCardId] = useState(null);
 
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!document.getElementById("cardList").contains(e.target)) {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (!document.getElementById("cardList").contains(e.target as Node)) {
         setSelectedCardId(null);
       }
     };

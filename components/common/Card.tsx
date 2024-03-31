@@ -1,38 +1,39 @@
 import { useState } from "react";
 import { getFormattedDate, getTimeAgo } from "../../utils/date.js";
-// import RemoveModal from './modal/RemoveModal.js';
-// import AddLinkModal from './modal/AddLinkModal.js';
+import RemoveModal from "./modal/RemoveModal.js";
+import AddLinkModal from "./modal/AddLinkModal.js";
 import Image from "next/image.js";
 import Link from "next/link.js";
 import noImage from "@/public/Images/noImage.svg";
 import kebab from "@/public/Images/kebab.svg";
 import emptyStar from "@/public/Images/emptyStar.svg";
 import styles from "./Card.module.css";
+import { CardProps } from "@/types/api.js";
 
 export default function Card({
   cardData,
   selectedCardId,
   setSelectedCardId,
   folderNameAndLinkList,
-}) {
+}: CardProps) {
   const [modals, setModals] = useState({
     removeModal: false,
     addLinkModal: false,
   });
 
-  const toggleModal = (modalName) => {
+  const toggleModal = (modalName: string) => {
     setModals((prevModals) => ({
       ...prevModals,
       [modalName]: !prevModals[modalName],
     }));
   };
 
-  const handleModalClose = (e, modalName) => {
+  const handleModalClose = (e: MouseEvent, modalName: string) => {
     e.preventDefault();
     toggleModal(modalName);
   };
 
-  const handlePopOver = (e) => {
+  const handlePopOver = (e: MouseEvent) => {
     e.preventDefault();
     setSelectedCardId(cardData.id);
   };
@@ -49,14 +50,24 @@ export default function Card({
             className={styles.cardThumbnail}
             src={cardData.imageSource || cardData.image_source || noImage}
             alt="카드썸네일"
+            width={300}
+            height={300}
+            priority
           />
         </div>
-        <Image className={styles.cardStar} src={emptyStar} alt="빈 별" />
+        <Image
+          className={styles.cardStar}
+          src={emptyStar}
+          alt="빈 별"
+          width={25}
+          height={25}
+          priority
+        />
         <div className={styles.cardDataArea}>
           <div className={styles.cardTimeAgo}>
             <p>{getTimeAgo(cardData.createdAt || cardData.created_at)}</p>
             <button onClick={handlePopOver}>
-              <Image src={kebab} alt="케밥" />
+              <Image src={kebab} alt="케밥" width={20} height={20} priority />
             </button>
             {selectedCardId === cardData.id && (
               <div className={styles.popOver}>
@@ -77,7 +88,7 @@ export default function Card({
           </div>
         </div>
       </Link>
-      {/* {modals.removeModal && (
+      {modals.removeModal && (
         <RemoveModal
           modalTitle="링크 삭제"
           titleContent={cardData.url}
@@ -90,7 +101,7 @@ export default function Card({
           linkUrl={cardData.url}
           onClose={(e) => handleModalClose(e, "addLinkModal")}
         />
-      )} */}
+      )}
     </>
   );
 }
