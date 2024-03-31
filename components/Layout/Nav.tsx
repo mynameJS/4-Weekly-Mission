@@ -4,7 +4,11 @@ import logo from "@/public/Images/logo.svg";
 import { UserDataProps } from "@/types/api";
 import styles from "./Nav.module.css";
 
-export default function Nav({ currentUserData }: UserDataProps) {
+export default function Nav({
+  currentUserData,
+}: {
+  currentUserData: UserDataProps;
+}) {
   return (
     <div className={styles.nav}>
       <div className={styles.navFrame}>
