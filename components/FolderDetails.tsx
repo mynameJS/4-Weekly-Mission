@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import useFetchData from "../hooks/useFetchData";
 import EditAndAddModal from "./common/modal/EditAndAddModal";
 import RemoveModal from "./common/modal/RemoveModal";
-import ShareFolderModal from "./common/modal/ShareFolderModal";
+import ShareFolderModal from "@/components/common/modal/ShareFolderModal";
 import FloatingActionButton from "./FloatingActionButton";
 import CardList from "./common/CardList";
 import SearchBar from "./common/SearchBar";
@@ -12,10 +12,15 @@ import share from "@/public/Images/share.svg";
 import pen from "@/public/Images/pen.svg";
 import remove from "@/public/Images/remove.svg";
 import styles from "./FolderDetails.module.css";
+import { FolderListData } from "@/types/api";
 
-export default function FolderDetails({ folderListData }) {
+export default function FolderDetails({
+  folderListData,
+}: {
+  folderListData: FolderListData;
+}) {
   const [windowWidth, setWindowWidth] = useState(0);
-  const [selectedFolder, setSelectedFolder] = useState("all");
+  const [selectedFolder, setSelectedFolder] = useState<string | number>("all");
   const [modals, setModals] = useState({
     addModal: false,
     editModal: false,
@@ -36,14 +41,14 @@ export default function FolderDetails({ folderListData }) {
       id: "",
     };
 
-  const toggleModal = (modalName) => {
+  const toggleModal = (modalName: string) => {
     setModals((prevModals) => ({
       ...prevModals,
       [modalName]: !prevModals[modalName],
     }));
   };
 
-  const handleFolderClick = (folderId) => {
+  const handleFolderClick = (folderId: number | string) => {
     setSelectedFolder(folderId);
   };
 

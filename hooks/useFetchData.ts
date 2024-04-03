@@ -18,7 +18,7 @@ const DATA_MAP = {
 const useFetchData = (
   dataType: keyof typeof DATA_MAP,
   userId?: number,
-  folderId?: number
+  folderId?: string | number
 ) => {
   const [data, setData] = useState<any>(null);
 

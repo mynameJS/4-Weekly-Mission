@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getFormattedDate, getTimeAgo } from "../../utils/date.js";
-import RemoveModal from "./modal/RemoveModal.js";
-import AddLinkModal from "./modal/AddLinkModal.js";
+import RemoveModal from "./modal/RemoveModal";
+import AddLinkModal from "@/components/common/modal/AddLinkModal";
 import Image from "next/image.js";
 import Link from "next/link.js";
 import noImage from "@/public/Images/noImage.svg";
@@ -33,10 +33,13 @@ export default function Card({
     toggleModal(modalName);
   };
 
-  const handlePopOver = (e: MouseEvent) => {
+  const handlePopOver = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setSelectedCardId(cardData.id);
   };
+
+  if (!folderNameAndLinkList) return null;
+
   return (
     <>
       <Link
@@ -92,14 +95,14 @@ export default function Card({
         <RemoveModal
           modalTitle="링크 삭제"
           titleContent={cardData.url}
-          onClose={(e) => handleModalClose(e, "removeModal")}
+          onClose={(e: MouseEvent) => handleModalClose(e, "removeModal")}
         />
       )}
       {modals.addLinkModal && (
         <AddLinkModal
           folderNameAndLinkList={folderNameAndLinkList}
           linkUrl={cardData.url}
-          onClose={(e) => handleModalClose(e, "addLinkModal")}
+          onClose={(e: MouseEvent) => handleModalClose(e, "addLinkModal")}
         />
       )}
     </>

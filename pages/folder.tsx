@@ -8,6 +8,8 @@ export default function Folder() {
   const currentUserData = useFetchData("targetUser", 1);
   const folderListData = useFetchData("targetUserFolderList", 1);
 
+  if (!folderListData || !currentUserData) return null;
+
   return (
     <>
       <Nav currentUserData={currentUserData} />

@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react";
 import Card from "./Card";
 import { CardListProps } from "@/types/api";
-import { MouseEvent } from "react";
 import styles from "./CardList.module.css";
 
 export default function CardList({
   cardDataList = [],
   folderNameAndLinkList = [],
 }: CardListProps) {
-  const [selectedCardId, setSelectedCardId] = useState(null);
+  const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
 
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
+    const handleClickOutside = (e: Event) => {
       if (!document.getElementById("cardList").contains(e.target as Node)) {
         setSelectedCardId(null);
       }
@@ -23,7 +22,6 @@ export default function CardList({
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
-
   return (
     <div id="cardList" className={styles.cardList}>
       <div className={styles.cardContainer}>
