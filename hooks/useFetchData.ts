@@ -15,26 +15,29 @@ const DATA_MAP = {
   targetUserFolderLinkList: getTargetUserFolderLinkListData,
 };
 
-const useFetchData = (dataType: string, userId?: number, folderId?: number) => {
-  const [data, setData] = useState(null);
+const useFetchData = (
+  dataType: keyof typeof DATA_MAP,
+  userId?: number,
+  folderId?: number
+) => {
+  const [data, setData] = useState<any>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         let targetData;
 
-        if (userId) {
-          if (userId && folderId) {
-            targetData = await DATA_MAP[dataType]?.(userId, folderId);
-          } else {
-            targetData = await DATA_MAP[dataType]?.(userId);
-          }
+        if (userId && folderId) {
+          targetData = await DATA_MAP[dataType]?.(userId, folderId);
+        } else if (userId) {
+          targetData = await DATA_MAP[dataType]?.(userId);
         } else {
           targetData = await DATA_MAP[dataType]?.();
         }
         setData(targetData);
       } catch (error) {
-        console.error(error);
+        // Throw error to the calling component
+        throw new Error(`Failed to fetch ${dataType} data: ${error.message}`);
       }
     };
 

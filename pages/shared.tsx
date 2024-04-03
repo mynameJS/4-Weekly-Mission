@@ -10,7 +10,7 @@ export default function Shared() {
   const data = useFetchData("sampleFolder");
   const currentUserData = useFetchData("sampleUser");
 
-  if (!data || !currentUserData) return <div>Loading...</div>;
+  if (!data || !currentUserData) return null;
 
   return (
     <div className={styles.SharedContainer}>
