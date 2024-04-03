@@ -3,14 +3,19 @@ import ModalBackgroundDim from "./ModalBackgroundDim";
 import check from "@/public/Images/check.svg";
 import styles from "./AddLinkModal.module.css";
 import Image from "next/image";
+import { AddLinkModalProps } from "@/types/api";
 
 export default function AddLinkModal({
   onClose,
   linkUrl,
   folderNameAndLinkList,
-}) {
-  const [selectedFolderId, setSelectedFolderId] = useState(null);
-  const handleSelectedFolderId = (e, folderId) => {
+}: AddLinkModalProps) {
+  const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null);
+  console.log(typeof selectedFolderId);
+  const handleSelectedFolderId = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    folderId: number
+  ) => {
     e.preventDefault();
     setSelectedFolderId(folderId);
   };

@@ -2,14 +2,15 @@ import { useState } from "react";
 import ModalBackgroundDim from "./ModalBackgroundDim";
 import Image from "next/image";
 import styles from "./EditAndAddModal.module.css";
+import { EditAndAddModalProps } from "@/types/api";
 
 export default function EditAndAddModal({
   modalTitle,
   buttonText,
-  selectedFolderName,
+  selectedFolderName = "",
   onClose,
-}) {
-  const [inputValue, setInputValue] = useState(selectedFolderName);
+}: EditAndAddModalProps) {
+  const [inputValue, setInputValue] = useState<string>(selectedFolderName);
   return (
     <>
       <ModalBackgroundDim />

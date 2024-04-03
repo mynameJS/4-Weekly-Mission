@@ -4,12 +4,13 @@ import facebook from "@/public/Images/Facebook_2.svg";
 import shareLink from "@/public/Images/link2.svg";
 import Image from "next/image";
 import styles from "./ShareFolderModal.module.css";
+import { ShareFolderModalProps } from "@/types/api";
 
 export default function ShareFolderModal({
   selectedFolderName,
   selectedFolderId,
   onClose,
-}) {
+}: ShareFolderModalProps) {
   const shareUrl = `http://localhost:3000/shared/${selectedFolderId}`;
 
   const handleCopyUrl = () => {
