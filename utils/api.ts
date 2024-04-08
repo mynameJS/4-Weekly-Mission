@@ -4,6 +4,7 @@ import {
   TargetUserData,
   TargetFolderListData,
   TargetUserFolderLinkData,
+  SignUserInput,
 } from "@/types/api";
 
 const BASE_URL = "https://bootcamp-api.codeit.kr/api/";
@@ -47,10 +48,44 @@ const getTargetUserFolderLinkListData = async (
 
   return data;
 };
+
+const signupUser = async (userInput: SignUserInput) => {
+  const postUrl = `${BASE_URL}api/sign-up`;
+  const response = await fetch(postUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userInput),
+  });
+  const data = await response.json();
+  return data;
+};
+
+const checkEmailValidate = async (email: string) => {
+  const postUrl = `${BASE_URL}check-email`;
+  let result;
+  try {
+    const response = await fetch(postUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+    result = await response.json();
+  } catch (error) {
+    result = error;
+  }
+  return result;
+};
+
 export {
   getSampleUserData,
   getSampleFolderData,
   getTargetUserData,
   getTargetUserFolderListData,
   getTargetUserFolderLinkListData,
+  signupUser,
+  checkEmailValidate,
 };

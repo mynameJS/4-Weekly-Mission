@@ -121,3 +121,8 @@ export interface ShareFolderModalProps {
   selectedFolderId: number;
   onClose: (e: MouseEvent, modalName: string) => void;
 }
+
+export interface SignUserInput {
+  email: string;
+  password: string;
+}
