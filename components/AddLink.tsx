@@ -8,7 +8,9 @@ import styles from "./AddLink.module.css";
 export default function AddLink({ folderListData }) {
   const [showModal, setShowModal] = useState(false);
   const [newLinkUrl, setNewLinkUrl] = useState("");
-  const toggleShowModal = () => setShowModal(!showModal);
+  const toggleShowModal = () => {
+    setShowModal((prevShowModal) => !prevShowModal);
+  };
   const folderNameAndLinkList = folderListData?.map(({ name, link, id }) => [
     name,
     link.count,
