@@ -54,7 +54,7 @@ export default function SignIn() {
                 placeholder="비밀번호를 입력해 주세요."
               />
               <button className={styles.eyeButton} type="button" tabIndex={-1}>
-                <Image src={eyeOn} alt="눈동자" width={20} height={20} />
+                <Image src={eyeOff} alt="눈동자가림" width={20} height={20} />
               </button>
             </div>
           </div>
