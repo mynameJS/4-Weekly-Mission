@@ -7,14 +7,17 @@ import google from "@/public/Images/google.png";
 import kakao from "@/public/Images/Kakao.svg";
 import styles from "@/styles/Sign.module.css";
 import { validatePasswordInput } from "@/utils/validate";
-import { checkEmailValidate } from "@/utils/api";
+import { checkEmailValidate, signUpUser } from "@/utils/api";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 interface ShowState {
   [key: string]: boolean;
 }
 
 export default function SignUp() {
+  const router = useRouter();
+
   const [userInput, setUserInput] = useState({
     email: "",
     password: "",
@@ -82,6 +85,24 @@ export default function SignUp() {
     });
   };
 
+  const onSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const isValidForm = Object.values(errorMessage).every(
+      (message) => message === ""
+    );
+    if (isValidForm) {
+      try {
+        const { passwordConfirm, ...submitUserInput } = userInput;
+        const result = await signUpUser(submitUserInput);
+        const { data: accessToken } = await signUpUser(submitUserInput);
+        localStorage.setItem("accessToken", accessToken);
+        router.push("/folder");
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
   return (
     <div className={styles.body}>
       <div className={styles.header}>
@@ -102,7 +123,7 @@ export default function SignUp() {
         </p>
       </div>
       <div className={styles.signBox}>
-        <form className={styles.signForm}>
+        <form className={styles.signForm} onSubmit={onSubmitForm}>
           <div className={styles.signInputs}>
             <div className={styles.signInputBox}>
               <label className={styles.signInputLabel} htmlFor="email">

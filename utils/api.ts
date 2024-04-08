@@ -49,8 +49,8 @@ const getTargetUserFolderLinkListData = async (
   return data;
 };
 
-const signupUser = async (userInput: SignUserInput) => {
-  const postUrl = `${BASE_URL}api/sign-up`;
+const signUpUser = async (userInput: SignUserInput) => {
+  const postUrl = `${BASE_URL}sign-up`;
   const response = await fetch(postUrl, {
     method: "POST",
     headers: {
@@ -86,6 +86,6 @@ export {
   getTargetUserData,
   getTargetUserFolderListData,
   getTargetUserFolderLinkListData,
-  signupUser,
+  signUpUser,
   checkEmailValidate,
 };
