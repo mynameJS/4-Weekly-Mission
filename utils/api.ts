@@ -62,6 +62,19 @@ const signUpUser = async (userInput: SignUserInput) => {
   return data;
 };
 
+const signInUser = async (userInput: SignUserInput) => {
+  const postUrl = `${BASE_URL}sign-in`;
+  const response = await fetch(postUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userInput),
+  });
+  const data = await response.json();
+  return data;
+};
+
 const checkEmailValidate = async (email: string) => {
   const postUrl = `${BASE_URL}check-email`;
   let result;
@@ -87,5 +100,6 @@ export {
   getTargetUserFolderListData,
   getTargetUserFolderLinkListData,
   signUpUser,
+  signInUser,
   checkEmailValidate,
 };

@@ -93,7 +93,6 @@ export default function SignUp() {
     if (isValidForm) {
       try {
         const { passwordConfirm, ...submitUserInput } = userInput;
-        const result = await signUpUser(submitUserInput);
         const { data: accessToken } = await signUpUser(submitUserInput);
         localStorage.setItem("accessToken", accessToken);
         router.push("/folder");
