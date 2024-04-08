@@ -8,7 +8,7 @@ import kakao from "@/public/Images/Kakao.svg";
 import styles from "@/styles/Sign.module.css";
 import { validatePasswordInput } from "@/utils/validate";
 import { checkEmailValidate, signUpUser } from "@/utils/api";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 interface ShowState {
@@ -102,6 +102,13 @@ export default function SignUp() {
       }
     }
   };
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("accessToken");
+    if (isLoggedIn) {
+      router.push("/folder");
+    }
+  });
 
   return (
     <div className={styles.body}>
