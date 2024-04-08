@@ -29,11 +29,6 @@ export default function Home() {
           name="twitter:image"
           content="https://visitbusan.net/uploadImgs/files/cntnts/20211130150754165_wufrotr"
         />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
-        />
       </Head>
       <main>메인페이지</main>
     </>
