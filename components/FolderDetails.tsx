@@ -103,7 +103,7 @@ export default function FolderDetails({
       </div>
       <div className={styles.actionButtonContainer}>
         <p>{selectedFolder === "all" ? "전체" : "유용한 글"}</p>
-        {!(selectedFolder === "all") && (
+        {selectedFolder !== "all" && (
           <div className={styles.actionButton}>
             <button
               className={styles.share}
